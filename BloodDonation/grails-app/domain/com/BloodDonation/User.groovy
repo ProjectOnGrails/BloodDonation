@@ -1,5 +1,6 @@
 package com.BloodDonation
 
+import User.Employee
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import grails.compiler.GrailsCompileStatic
@@ -10,7 +11,7 @@ import grails.compiler.GrailsCompileStatic
 class User implements Serializable {
 
     private static final long serialVersionUID = 1
-
+    static belongsTo = [employee: Employee]
     String username
     String password
     boolean enabled = true
