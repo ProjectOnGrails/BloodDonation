@@ -2,25 +2,24 @@ package blooddonation
 
 import grails.gorm.transactions.Transactional
 
-
-class DonerController {
+class PatientController {
     def springSecurityService
     def index()
     {
-        def doners = Doner.list()
-        [doners:doners]
+        def patients = Patient.list()
+        [patients:patients]
     }
     def save()
     {
         try {
-            Doner doner = new Doner(params)
+            Patient patient = new Patient(params)
             def user = springSecurityService.currentUser
-            doner.createdBy = user
-            if (doner.save()) {
+            patient.createdBy = user
+            if (patient.save()) {
                 flash.message = "Data saved successfully"
                 redirect(action: "index")
             } else {
-                flash.message = "Data cannot be saved ${doner.errors}"
+                flash.message = "Data cannot be saved ${patient.errors}"
                 redirect(action: "index")
             }
         }
@@ -30,15 +29,16 @@ class DonerController {
             redirect(action: "index")
         }
     }
+
     @Transactional
     def delete(Long id) {
         try {
-            def doner = Doner.get(id)
-            if (doner) {
-                doner.delete()
-                flash.message = "Doner Deleted Successfully"
+            def patient = Patient.get(id)
+            if (patient) {
+                patient.delete()
+                flash.message = "Patient Deleted Successfully"
             } else {
-                flash.message = "Doner not found"
+                flash.message = "Patient not found"
             }
         }
         catch (Exception e) {
@@ -52,20 +52,20 @@ class DonerController {
     def edit()
     {
         def id = params.id
-        Doner donerInstance = Doner.findById(id)
-        render(template: "edit",model: [data:donerInstance])
+        Patient patientInstance = Patient.findById(id)
+        render(template: "edit",model: [data:patientInstance])
     }
 
     @Transactional
     def update() {
         def user = springSecurityService.currentUser
-        def donerId = params.id
-        Doner donerInstance = Doner.findById(donerId)
-        if(donerInstance){
+        def patientId = params.id
+        Patient patientInstance = Patient.findById(patientId)
+        if(patientInstance){
             try {
-                donerInstance.properties = params
-                donerInstance.updatedBy = user
-                if(donerInstance.save(flush:true)) {
+                patientInstance.properties = params
+                patientInstance.updatedBy = user
+                if(patientInstance.save(flush:true)) {
                     flash.message = "${message(code: 'default.updated.message')}"
                     redirect(action:"index")
                 }else {
@@ -73,7 +73,7 @@ class DonerController {
                     redirect(action: "index")
                 }
             }catch(e) {
-                flash.error = "Doner update failed: ${e.message}"
+                flash.error = "Patient update failed: ${e.message}"
                 redirect(action: "index")
             }
         }
@@ -83,6 +83,4 @@ class DonerController {
             redirect(action: "index")
         }
     }
-
-
 }
