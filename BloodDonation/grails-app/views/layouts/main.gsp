@@ -21,7 +21,7 @@
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Doner</a></li>
+            <li><a href="/doner/index">Doner</a></li>
             <li><a href="#">Blood</a></li>
             <li><a href = "#">Patient</a></li>
             <li><a href = "#">Transaction</a></li>

@@ -11,7 +11,8 @@ class Bloodrecord {
     Date lastUpdated
     String createdBy
     String updatedBy
-    static hasOne = [doner:Doner, transaction:Transaction]
+    static hasOne = [transaction:Transaction]
+    static belongsTo = [doner:Doner]
     static constraints = {
     }
 }

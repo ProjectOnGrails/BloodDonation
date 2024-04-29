@@ -6,17 +6,25 @@ import com.BloodDonation.Gender
 class Doner {
     String name
     BloodGroup bloodgroup
-    Date last_time_donated
+    String last_time_donated
     String address
     int age
     Gender gender
     String phn
-    String email
     Date dateCreated
     Date lastUpdated
     String createdBy
     String updatedBy
-    static belongsTo = [blood:Bloodrecord]
+    static hasOne = [blood:Bloodrecord]
     static constraints = {
+        createdBy nullable: true
+        updatedBy nullable: true
+        blood nullable: true
+    }
+    def beforeinsert = {
+        dateCreated = new Date()
+    }
+    def beforeupdate = {
+        lastUpdated = new Date()
     }
 }
