@@ -8,7 +8,7 @@ import com.BloodDonation.Gender
 import com.BloodDonation.UserRole
 
 class BootStrap {
-
+    def setupService
     def init = { servletContext ->
         for (String url in [
                 '/', '/error', '/index', '/index.gsp', '/**/favicon.ico', '/shutdown',
@@ -18,19 +18,7 @@ class BootStrap {
             new Requestmap(url: url, configAttribute: 'permitAll').save()
         }
         new Requestmap(url: '/role/**', configAttribute: 'ROLE_ADMIN').save()
-
-        def user = new User(
-                username: "admin",
-                password: "admin"
-        )
-        def role = new Role(
-                authority: "ROLE_ADMIN"
-        ).save()
-        new Employee(name:"Smriti Guragain", age: 23, gender: Gender.Female, joindate: new Date(), phone:"9825111243", email: "smritiguragain111@gmail.com", createdBy: "Smriti Guragain", user: user).save()
-        new UserRole(
-                user: user,
-                role: role
-        ).save()
+    setupService.initialEntry()
     }
     def destroy = {
     }
