@@ -48,7 +48,6 @@ class DonerController {
     def update()
     {
         try{
-
             def result = donerService.update(params)
             flash.message= result.message
             redirect(action: "index")

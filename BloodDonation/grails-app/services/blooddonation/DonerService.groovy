@@ -50,5 +50,9 @@ class DonerService {
 
             }
         }
+        else
+        {
+            return [message: "Not found data"]
+        }
     }
 }

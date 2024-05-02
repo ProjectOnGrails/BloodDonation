@@ -49,5 +49,9 @@ class RoleService {
                 return [message: "Role not updated"]
             }
         }
+        else
+        {
+            return [message: "Not found data"]
+        }
     }
 }
