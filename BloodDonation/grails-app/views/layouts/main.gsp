@@ -26,6 +26,7 @@
             <li><a href = "/patient/index">Patient</a></li>
             <li><a href = "#">Transaction</a></li>
             <li><a href="/role/index">Role</a></li>
+            <li><a href="/employee/index">Employee</a></li>
         </ul>
         <hr color="white">
     </nav>

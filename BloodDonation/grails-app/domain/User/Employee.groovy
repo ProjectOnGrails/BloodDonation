@@ -7,7 +7,6 @@ class Employee {
     String name
     int age
     Gender gender
-    Date joindate
     String phone
     String email
     Date dateCreated
@@ -18,6 +17,7 @@ class Employee {
     static constraints = {
         lastUpdated nullable: true
         updatedBy nullable:  true
+        user nullable:true
     }
     def beforeinsert = {
         dateCreated = new Date()

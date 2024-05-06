@@ -18,6 +18,7 @@ class BootStrap {
             new Requestmap(url: url, configAttribute: 'permitAll').save()
         }
         new Requestmap(url: '/role/**', configAttribute: 'ROLE_ADMIN').save()
+        new Requestmap(url: '/employee/**', configAttribute: 'ROLE_ADMIN').save()
     setupService.initialEntry()
     }
     def destroy = {
