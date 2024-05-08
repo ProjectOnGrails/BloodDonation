@@ -5,12 +5,12 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class BloodrecordService {
     def springSecurityService
-    def blood()
+    def blood_data()
     {
         def data =  Bloodrecord.list()
         return data
     }
-    def doner()
+    def doner_data()
     {
         def data1 = Doner.findAll()
         return data1

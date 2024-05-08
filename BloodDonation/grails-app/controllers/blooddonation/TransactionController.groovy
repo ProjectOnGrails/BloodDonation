@@ -2,19 +2,20 @@ package blooddonation
 
 import grails.gorm.transactions.Transactional
 
-class BloodrecordController {
-    def bloodrecordService
-
+class TransactionController {
+    def transactionService
     def index()
     {
-        def doners = bloodrecordService.doner_data()
-        def blood = bloodrecordService.blood_data()
-        [doners:doners, bloods:blood ]
+        def transactions = transactionService.index()
+        def patients = transactionService.patient_data()
+        def blood = transactionService.blood_data()
+        [transactions:transactions, patients:patients, blood:blood]
     }
+
     def save()
     {
         try {
-            def result =bloodrecordService.save(params)
+            def result =transactionService.save(params)
             flash.message = result.message
             redirect(action: "index")
         }
@@ -28,7 +29,7 @@ class BloodrecordController {
     def delete(Long id)
     {
         try{
-            def result = bloodrecordService.delete(id)
+            def result = transactionService.delete(id)
             flash.message = result.message
         }
         catch (Exception e) {
@@ -36,29 +37,28 @@ class BloodrecordController {
             flash.message = "Cannot connect to databaase"
         }
         redirect(action: "index")
-
     }
     def edit()
     {
         def id = params.id
-        Bloodrecord recordInstance = Bloodrecord.findById(id)
-        def doner = Doner.findAll()
-        render(template: "edit", model: [data:recordInstance, doners:doner])
+        Transaction instance = Transaction.findById(id)
+        def blood = Bloodrecord.findAll()
+        def patient = Patient.findAll()
+        render(template: "edit", model: [data:instance, bloods:blood, patients:patient])
     }
-
     @Transactional
     def update()
     {
         try{
-            def result = bloodrecordService.update(params)
+            def result = transactionService.update(params)
             flash.message = result.message
             redirect(action: "index")
         }
         catch (Exception e)
         {
-            flash.message = "Cannot connect to database"
+            println(e)
+            flash.message = "Cannot connect to database ${e.message}"
             redirect(action: "index")
         }
     }
-
 }
