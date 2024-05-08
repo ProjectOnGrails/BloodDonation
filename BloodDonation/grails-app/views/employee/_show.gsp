@@ -21,7 +21,7 @@
             <td>${employee.phone}</td>
             <td>${employee.email}</td>
             <td>
-                <g:link  class="btn btn-primary editBtn" data-bs-toggle="modal" data-role-id="${employee.id}">Update</g:link>
+                <g:link  class="btn btn-primary editBtn" data-bs-toggle="modal" data-emp-id="${employee.id}">Update</g:link>
                 <g:link action="delete" id="${employee.id}" onclick="return confirm('Are you sure you want to delete this product?')">
                     <button type="button" class="btn btn-danger">Delete</button>
                 </g:link>

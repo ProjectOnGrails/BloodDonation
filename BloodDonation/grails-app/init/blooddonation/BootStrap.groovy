@@ -14,7 +14,7 @@ class BootStrap {
                 '/', '/error', '/index', '/index.gsp', '/**/favicon.ico', '/shutdown',
                 '/assets/**', '/**/js/**', '/**/css/**', '/**/images/**',
                 '/login', '/login.*', '/login/*',
-                '/logout', '/logout.*', '/logout/*', '/doner/**', '/patient/**']) {
+                '/logout', '/logout.*', '/logout/*', '/doner/**', '/patient/**', '/bloodrecord/**']) {
             new Requestmap(url: url, configAttribute: 'permitAll').save()
         }
         new Requestmap(url: '/role/**', configAttribute: 'ROLE_ADMIN').save()

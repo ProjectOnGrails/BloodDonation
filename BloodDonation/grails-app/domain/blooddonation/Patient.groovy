@@ -15,7 +15,7 @@ class Patient {
     Date lastUpdated
     String createdBy
     String updatedBy
-    static hasOne = [transaction:Transaction]
+    static hasMany = [transaction:Transaction]
     static constraints = {
         createdBy nullable: true
         updatedBy nullable: true

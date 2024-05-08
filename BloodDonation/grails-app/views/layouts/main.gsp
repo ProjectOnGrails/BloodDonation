@@ -22,7 +22,7 @@
             <li><a href="#">Home</a></li>
             <li><a href="#">Dashboard</a></li>
             <li><a href="/doner/index">Doner</a></li>
-            <li><a href="#">Blood</a></li>
+            <li><a href="/bloodrecord/index">Blood</a></li>
             <li><a href = "/patient/index">Patient</a></li>
             <li><a href = "#">Transaction</a></li>
             <li><a href="/role/index">Role</a></li>

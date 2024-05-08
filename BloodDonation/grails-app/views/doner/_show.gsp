@@ -26,7 +26,7 @@
             <td>${doner.gender}</td>
             <td>${doner.phn}</td>
             <td>
-                <g:link  class="btn btn-primary editBtn" data-bs-toggle="modal" data-role-id="${doner.id}">Update</g:link>
+                <g:link  class="btn btn-primary editBtn" data-bs-toggle="modal" data-doner-id="${doner.id}">Update</g:link>
                 <g:link action="delete" id="${doner.id}" onclick="return confirm('Are you sure you want to delete this product?')">
                     <button type="button" class="btn btn-danger">Delete</button>
                 </g:link>

@@ -4,9 +4,9 @@ import com.BloodDonation.BloodGroup
 
 class Bloodrecord {
     BloodGroup bloodGroup
-    Date collected_date
+    String collected_date
     String collection_type
-    int quantiy
+    int quantity
     Date dateCreated
     Date lastUpdated
     String createdBy
@@ -14,5 +14,14 @@ class Bloodrecord {
     static hasOne = [transaction:Transaction]
     static belongsTo = [doner:Doner]
     static constraints = {
+        transaction nullable: true
+        createdBy nullable: true
+        updatedBy nullable: true
+    }
+    def beforeinsert = {
+        dateCreated = new Date()
+    }
+    def beforeupdate = {
+        lastUpdated = new Date()
     }
 }

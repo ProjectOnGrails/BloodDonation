@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="layout" content="main"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-    <title>Doner</title>
+    <title>BloodRecord</title>
 
 </head>
 
@@ -18,7 +18,7 @@
 <!-- Button trigger modal -->
 <g:render template="create"/>
 
-<div class="modal-body" id="patientEdit"></div>
+<div class="modal-body" id="bloodEdit"></div>
 <!-- Your HTML table -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
@@ -29,14 +29,14 @@
 <script>
 
     $(".editBtn").click(function(){
-        var patientId = $(this).data('patient-id');
+        var bloodId = $(this).data('blood-id');
         $.ajax({
-            url: "${createLink(controller:'patient',action:'edit')}",
+            url: "${createLink(controller:'bloodrecord',action:'edit')}",
             type:'post',
-            data: {id:patientId},
+            data: {id:bloodId},
             success: function(response) {
                 console.log('Controller action called successfully.');
-                $('#patientEdit').html(response);
+                $('#bloodEdit').html(response);
                 $('#editModal').modal('show');
             },
             error: function(xhr, status, error) {
