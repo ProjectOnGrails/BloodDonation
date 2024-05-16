@@ -7,9 +7,21 @@ class TransactionController {
     def index()
     {
         def transactions = transactionService.index()
+        [transactions:transactions]
+    }
+    def create()
+    {
         def patients = transactionService.patient_data()
         def blood = transactionService.blood_data()
-        [transactions:transactions, patients:patients, blood:blood]
+        render(template: "create",model: [patients:patients, blood:blood])
+    }
+    def view()
+    {
+        def id = params.id
+        Transaction instance = Transaction.findById(id)
+        def blood = Bloodrecord.findAll()
+        def patient = Patient.findAll()
+        render(template: "view", model: [data:instance, bloods:blood, patients:patient])
     }
 
     def save()

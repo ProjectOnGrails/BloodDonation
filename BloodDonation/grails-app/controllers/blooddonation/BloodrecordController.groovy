@@ -7,9 +7,13 @@ class BloodrecordController {
 
     def index()
     {
-        def doners = bloodrecordService.doner_data()
         def blood = bloodrecordService.blood_data()
-        [doners:doners, bloods:blood ]
+        [bloods:blood ]
+    }
+    def create()
+    {
+        def doners = bloodrecordService.doner_data()
+        render(template: "create",model: [doners:doners])
     }
     def save()
     {
@@ -44,6 +48,13 @@ class BloodrecordController {
         Bloodrecord recordInstance = Bloodrecord.findById(id)
         def doner = Doner.findAll()
         render(template: "edit", model: [data:recordInstance, doners:doner])
+    }
+    def view()
+    {
+        def id = params.id
+        Bloodrecord recordInstance = Bloodrecord.findById(id)
+        def doner = Doner.findAll()
+        render(template: "view", model: [data:recordInstance, doners:doner])
     }
 
     @Transactional

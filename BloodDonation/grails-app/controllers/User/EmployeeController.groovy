@@ -1,6 +1,7 @@
 package User
 
 import blooddonation.Patient
+import com.BloodDonation.Role
 import grails.gorm.transactions.Transactional
 
 class EmployeeController {
@@ -9,6 +10,11 @@ class EmployeeController {
     {
         def employees = employeeService.show()
         [employees:employees]
+    }
+    def create()
+    {
+        def roles = employeeService.roledata()
+        render(template: "create",model: [roles:roles])
     }
 
     def save()
@@ -25,11 +31,19 @@ class EmployeeController {
             redirect(action: "index")
         }
     }
+    def view()
+    {
+        def id = params.id
+        Employee employeeInstance = Employee.findById(id)
+        def roles = Role.findAll()
+        render(template: "view",model: [data:employeeInstance, roles:roles])
+    }
     def edit()
     {
         def id = params.id
         Employee employeeInstance = Employee.findById(id)
-        render(template: "edit",model: [data:employeeInstance])
+        def roles = Role.findAll()
+        render(template: "edit",model: [data:employeeInstance, roles:roles])
     }
 
     @Transactional

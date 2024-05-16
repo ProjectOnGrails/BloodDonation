@@ -22,6 +22,12 @@ class PatientController {
             redirect(action: "index")
         }
     }
+    def view()
+    {
+        def id = params.id
+        Patient patientInstance = Patient.findById(id)
+        render(template: "view",model: [data:patientInstance])
+    }
 
     @Transactional
     def delete(Long id) {

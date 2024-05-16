@@ -16,7 +16,26 @@
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <g:render template="/Shared/message"/>
 <!-- Button trigger modal -->
-<g:render template="create"/>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" id="addbloodRecord">
+    Create Bloodrecord
+</button>
+<hr>
+
+<!-- Modal -->
+<div class="modal fade" id="bloodRecordModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="bloodRecordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="bloodRecordModalLabel">Add Bloodrecord</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body" id="showblood">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal-body" id="bloodEdit"></div>
 <!-- Your HTML table -->
@@ -38,6 +57,36 @@
                 console.log('Controller action called successfully.');
                 $('#bloodEdit').html(response);
                 $('#editModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error calling controller action:', error);
+            }
+        });
+    });
+    $("#addbloodRecord").click(function(){
+        $.ajax({
+            url: "${createLink(controller:'bloodrecord',action:'create')}",
+            type:'post',
+            success: function(response) {
+                console.log('Controller action called successfully.');
+                $('#showblood').html(response);
+                $('#bloodRecordModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error calling controller action:', error);
+            }
+        });
+    });
+    $(".viewBtn").click(function(){
+        var bloodId = $(this).data('blood-id');
+        $.ajax({
+            url: "${createLink(controller:'bloodrecord',action:'view')}",
+            type:'post',
+            data: {id:bloodId},
+            success: function(response) {
+                console.log('Controller action called successfully.');
+                $('#bloodEdit').html(response);
+                $('#viewModal').modal('show');
             },
             error: function(xhr, status, error) {
                 console.error('Error calling controller action:', error);

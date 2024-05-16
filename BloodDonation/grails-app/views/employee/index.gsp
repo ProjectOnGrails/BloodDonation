@@ -16,7 +16,27 @@
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <g:render template="/Shared/message"/>
 <!-- Button trigger modal -->
-<g:render template="create"/>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal"  id="addEmployee">
+    Create Employee
+</button>
+<hr>
+
+<!-- Modal -->
+<div class="modal fade" id="employeeModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="employeeModalLabel">Add Employee</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body" id="showemp">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal-body" id="empEdit"></div>
 <!-- Your HTML table -->
@@ -38,6 +58,36 @@
                 console.log('Controller action called successfully.');
                 $('#empEdit').html(response);
                 $('#editModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error calling controller action:', error);
+            }
+        });
+    });
+    $("#addEmployee").click(function(){
+        $.ajax({
+            url: "${createLink(controller:'employee',action:'create')}",
+            type:'post',
+            success: function(response) {
+                console.log('Controller action called successfully.');
+                $('#showemp').html(response);
+                $('#employeeModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error calling controller action:', error);
+            }
+        });
+    });
+    $(".viewBtn").click(function(){
+        var empId = $(this).data('emp-id');
+        $.ajax({
+            url: "${createLink(controller:'employee',action:'view')}",
+            type:'post',
+            data: {id:empId},
+            success: function(response) {
+                console.log('Controller action called successfully.');
+                $('#empEdit').html(response);
+                $('#viewModal').modal('show');
             },
             error: function(xhr, status, error) {
                 console.error('Error calling controller action:', error);

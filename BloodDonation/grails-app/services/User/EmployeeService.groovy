@@ -1,6 +1,9 @@
 package User
 
 import blooddonation.Doner
+import com.BloodDonation.Role
+import com.BloodDonation.User
+import com.BloodDonation.UserRole
 import grails.gorm.transactions.Transactional
 
 @Transactional
@@ -11,14 +14,26 @@ class EmployeeService {
         def employees = Employee.list()
         return employees
     }
+    def roledata()
+    {
+        def data = Role.findAll()
+        return data
+    }
 
     def save(params)
     {
         Employee employee = new Employee(params)
-        def user = springSecurityService.currentUser
-        employee.createdBy = user
+        def role = Role.findByAuthority(params.role)
+        def currentuser = springSecurityService.currentUser
+        employee.createdBy = currentuser
         if (employee.save()) {
-            return [message: "Data saved successfully"]
+            User user = new User(username: params.username, password: params.password)
+            user.employee = employee
+            if(user.save(failOnError: true))
+            {
+                def userrole = new UserRole(user: user, role: role).save(failOnError: true)
+                return [message: "Data saved successfully"]
+            }
         } else {
             return [message: "Data cannot be saved ${employee.errors} "]
         }
@@ -28,7 +43,12 @@ class EmployeeService {
     {
         def employee = Employee.get(id)
         if (employee) {
-            employee.delete()
+            def user = employee.user
+            if (user) {
+                UserRole.removeAll(user)
+                user.delete(failOnError: true)
+            }
+            employee.delete(failOnError: true)
             return [message: "Employee deleted successfully"]
         } else {
             return [message: "Employee not found"]
@@ -37,23 +57,30 @@ class EmployeeService {
 
     def update(params)
     {
-        def user = springSecurityService.currentUser
         def employeeId = params.id
         Employee employeeInstance = Employee.findById(employeeId)
-        if(employeeInstance){
+        if (employeeInstance) {
+            def currentUser = springSecurityService.currentUser
             employeeInstance.properties = params
-            employeeInstance.updatedBy = user
-            if(employeeInstance.save(flush:true)) {
-                return [message: "Employee updated successfully"]
+            employeeInstance.updatedBy = currentUser.username
 
-            }else {
-                return [message: "Error while updating employee"]
+            def userInstance = employeeInstance.user
+            if (userInstance) {
+                userInstance.username = params.username
+                userInstance.password = params.password
 
+                def role = Role.findByAuthority(params.role)
+                UserRole.removeAll(userInstance)
+                UserRole.create(userInstance, role, true)
             }
-        }
-        else
-        {
-            return [message: "Not found data"]
+
+            if (employeeInstance.save(failOnError: true)) {
+                return [message: "Employee updated successfully"]
+            } else {
+                return [message: "Error while updating employee. ${employeeInstance.errors}"]
+            }
+        } else {
+            return [message: "Employee not found"]
         }
     }
 }

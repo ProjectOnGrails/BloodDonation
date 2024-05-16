@@ -4,7 +4,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editModalLabel">Update Doner</h1>
+                <h1 class="modal-title fs-5" id="editModalLabel">Update Employee</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -34,6 +34,18 @@
                         <div class="form-group">
                             <label for="email">Email:</label>
                             <input type="text" class="form-control" id="email" name="email" value="${data.email}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username" value="${data.user.username}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" value="${data.user.password}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role:</label>
+                            <g:select name="role" from="${roles}" optionKey="authority" optionValue="authority" class="form-control" value="${data.user.authorities.authority}" required="true" noSelection="['': 'Select Role']"/>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

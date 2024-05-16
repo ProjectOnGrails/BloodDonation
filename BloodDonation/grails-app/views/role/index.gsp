@@ -16,7 +16,25 @@
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <g:render template="/Shared/message"/>
 <!-- Button trigger modal -->
-<g:render template="create"/>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addRole">
+    Create Role
+</button>
+<hr>
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Role</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <g:render template="create"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal-body" id="roleEdit"></div>
 <!-- Your HTML table -->

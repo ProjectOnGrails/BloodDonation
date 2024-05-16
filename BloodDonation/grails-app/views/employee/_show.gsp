@@ -7,7 +7,6 @@
         <th>Age</th>
         <th>Gender</th>
         <th>Phone</th>
-        <th>Email</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -19,8 +18,8 @@
             <td>${employee.age}</td>
             <td>${employee.gender}</td>
             <td>${employee.phone}</td>
-            <td>${employee.email}</td>
             <td>
+                <g:link  class="btn btn-primary viewBtn" data-bs-toggle="modal" data-emp-id="${employee.id}">View</g:link>
                 <g:link  class="btn btn-primary editBtn" data-bs-toggle="modal" data-emp-id="${employee.id}">Update</g:link>
                 <g:link action="delete" id="${employee.id}" onclick="return confirm('Are you sure you want to delete this product?')">
                     <button type="button" class="btn btn-danger">Delete</button>

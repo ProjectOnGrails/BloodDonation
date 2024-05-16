@@ -23,6 +23,12 @@ class DonerController {
             redirect(action: "index")
         }
     }
+    def view()
+    {
+        def id = params.id
+        Doner donerInstance = Doner.findById(id)
+        render(template: "view",model: [data:donerInstance])
+    }
     @Transactional
     def delete(Long id) {
         try {

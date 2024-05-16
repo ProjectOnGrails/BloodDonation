@@ -16,7 +16,27 @@
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <g:render template="/Shared/message"/>
 <!-- Button trigger modal -->
-<g:render template="create"/>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donerModal" id="addDoner">
+  Create Doner
+</button>
+<hr>
+
+<!-- Modal -->
+<div class="modal fade" id="donerModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="donerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="donerModalLabel">Add Doner</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <g:render template="create"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal-body" id="donerEdit"></div>
 <!-- Your HTML table -->
@@ -38,6 +58,22 @@
         console.log('Controller action called successfully.');
         $('#donerEdit').html(response);
         $('#editModal').modal('show');
+      },
+      error: function(xhr, status, error) {
+        console.error('Error calling controller action:', error);
+      }
+    });
+  });
+  $(".viewBtn").click(function(){
+    var donerId = $(this).data('doner-id');
+    $.ajax({
+      url: "${createLink(controller:'doner',action:'view')}",
+      type:'post',
+      data: {id:donerId},
+      success: function(response) {
+        console.log('Controller action called successfully.');
+        $('#donerEdit').html(response);
+        $('#viewModal').modal('show');
       },
       error: function(xhr, status, error) {
         console.error('Error calling controller action:', error);
