@@ -9,6 +9,7 @@ import com.BloodDonation.UserRole
 
 class BootStrap {
     def setupService
+    def springSecurityService
     def init = { servletContext ->
         for (String url in [
                 '/', '/error', '/index', '/index.gsp', '/**/favicon.ico', '/shutdown',
@@ -21,6 +22,7 @@ class BootStrap {
         new Requestmap(url: '/employee/**', configAttribute: 'ROLE_ADMIN').save()
         new Requestmap(url: '/user/**', configAttribute: 'ROLE_ADMIN').save()
         new Requestmap(url: '/userRole/**', configAttribute: 'ROLE_ADMIN').save()
+        springSecurityService.clearCachedRequestmaps()
     setupService.initialEntry()
     }
     def destroy = {

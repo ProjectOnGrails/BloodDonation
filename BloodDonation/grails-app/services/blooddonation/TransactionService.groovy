@@ -13,6 +13,7 @@ class TransactionService {
     def blood_data()
     {
         def data1 = Bloodrecord.findAll()
+
         return data1
     }
     def index()

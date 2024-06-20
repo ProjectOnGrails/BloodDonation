@@ -1,4 +1,4 @@
-<table id="myTable">
+<table class="table table-striped" id="myTable">
     <!-- Table header and body -->
     <thead>
     <tr>
@@ -16,9 +16,9 @@
             <td>${role.authority}</td>
             <td>${role.updateCount}</td>
             <td>
-                <g:link  class="btn btn-primary editBtn" data-bs-toggle="modal" data-role-id="${role.id}">Update</g:link>
+                <g:link  class="btn btn-primary editBtn" data-bs-toggle="modal" data-role-id="${role.id}"><i class="bi bi-pen"></i></g:link>
                 <g:link action="delete" id="${role.id}" onclick="return confirm('Are you sure you want to delete this product?')">
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                 </g:link>
             </td>
         </tr>

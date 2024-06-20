@@ -1,5 +1,5 @@
 package com.BloodDonation
 
 enum Status {
-    Reserved, Dispatched, Declined
+    Reserved, Dispatched
 }

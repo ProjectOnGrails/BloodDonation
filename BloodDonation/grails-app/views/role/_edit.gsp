@@ -1,34 +1,28 @@
-
 <!-- Modal -->
-<div class="modal fade" id="editModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editModalLabel">Update Role</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-body">
-                    <g:form controller="role" action="update" id="${data.id}">
-                        <div class="form-group">
-                            <label >Role Id:
-                                <input type="number" name="identity" class="form-control" value="${data.id}" disabled="disabled"/>
-                            </label>
-                            <br/>
-                            <label for="authority">Authority:</label>
-                            <input type="text" class="form-control" id="authority" name="authority" value="${data.authority}" required>
+
+                <g:form controller="role" action="update" id="${data.id}">
+                    <div class="form-group row g-3 mb-2">
+                        <div class="col">
+                            <div class="form-floating mb-2">
+                                <input type="number" class="form-control" id="identity" name="identity" value="${data.id}" disabled required>
+                                <label for="identity">Role Id:</label>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="Submit" class="btn btn-primary" value="Submit" id="edit" >Update</button>
+                    </div>
+                    <div class="form-group row g-3 mb-2">
+                        <div class="col">
+                            <div class="form-floating mb-2">
+                                <input type="text" class="form-control" id="authority" name="authority" value="${data.authority}" required>
+                                <label for="authority">Authority:</label>
+                            </div>
                         </div>
-                        <!-- Add more form fields as needed -->
-                    </g:form>
-
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" value="Submit" id="edit">Update</button>
+                    </div>
+                </g:form>
             </div>
-
-
         </div>
     </div>
 </div>

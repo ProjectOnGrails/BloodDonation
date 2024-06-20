@@ -8,45 +8,73 @@
     <meta name="layout" content="main"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
     <title>BloodRecord</title>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-<g:render template="/Shared/message"/>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" id="addbloodRecord">
-    Create Bloodrecord
-</button>
-<hr>
-
-<!-- Modal -->
-<div class="modal fade" id="bloodRecordModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="bloodRecordModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="bloodRecordModalLabel">Add Bloodrecord</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="container text-center">
+    <g:render template="/Shared/message"/>
+    <div class="row">
+        <div class="col">
+            <!-- Button trigger modal -->
+            <button class="btn btn-primary" data-bs-toggle="modal" id="addbloodRecord">
+                Create Bloodrecord
+            </button>
+            <hr class="text-decoration-none"/>
+            <!--Create Modal -->
+            <div class="modal fade" id="bloodRecordModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="bloodRecordModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5" id="bloodRecordModalLabel">Add Bloodrecord</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-body" id="showblood"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <div class="modal-body" id="showblood">
+            <!--Edit Modal -->
+            <div class="modal fade" id="editModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5" id="editModalLabel">Update BloodRecord</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-body" id="bloodEdit"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--View Modal -->
+            <div class="modal fade" id="viewModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title fs-5" id="viewModalLabel">View BloodRecord</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-body" id="bloodView"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <g:render template="show" />
+    </div>
 </div>
 
-<div class="modal-body" id="bloodEdit"></div>
-<!-- Your HTML table -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
-<g:render template="show" />
 
-<!-- Initialize DataTables -->
+
 <script>
-
     $(".editBtn").click(function(){
         var bloodId = $(this).data('blood-id');
         $.ajax({
@@ -85,7 +113,7 @@
             data: {id:bloodId},
             success: function(response) {
                 console.log('Controller action called successfully.');
-                $('#bloodEdit').html(response);
+                $('#bloodView').html(response);
                 $('#viewModal').modal('show');
             },
             error: function(xhr, status, error) {
@@ -98,6 +126,8 @@
     });
 </script>
 
-
+<!-- Your HTML table -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- Initialize DataTables -->
 </body>
 </html>
